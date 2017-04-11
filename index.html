@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="./style.css">
+		<title>Editor HTML</title>
+
+		<script src="functions/textStyles.js"></script>
+		<script src="functions/alignText.js"></script>
+		<script src="functions/fontStyles.js"></script>
+		<script src="functions/changeColors.js"></script>
+		<script src="functions/add_media.js"></script>
+		<script src="functions/editor.js"></script>
+		<script src="functions/add_table.js"></script>
+	</head>
+	<body onload="getFonts();">
+	<OBJECT id=dlgHelper CLASSID="clsid:3050f819-98b5-11cf-bb82-00aa00bdce0b" width="0px" height="0px">
+</OBJECT>
+	
+	<div id = "div_meniu"> 
+		<div id = "submeniu1">
+			<input onclick="getStyle('bold');" type="image" class="icon-image" title="Bold" src="images/bold.png"/>
+			<input onclick="getStyle('italic');" type="image" class="icon-image" title="Italic" src="images/italic.png"/>
+			<input onclick="getStyle('underline');" type="image" class="icon-image" title="Underline" src="images/underline.png"/>
+			<input onclick="getStyle('strikethrough')" type="image" class="icon-image" title="Strikethrough" src="images/strikethrough.png"/>
+		</div>
+
+		<div id = "submeniu2">
+			<input onclick="getAlign('left');" type="image" class="icon-image" title="Align text left" src="images/left.png"/>
+			<input onclick="getAlign('center');" type="image" class="icon-image" title="Center" src="images/center.png"/>
+			<input onclick="getAlign('right');" type="image" class="icon-image" title="Align text right" src="images/right.png"/>
+			<input onclick="getAlign('justify');" type="image" class="icon-image" title="Justify" src="images/justify.png"/>	
+		</div>
+
+		<div id ="submeniu3">		
+			<input type="color" id="change_color" name="favcolor" value="#FF7F50"  title = "Pick a color" />
+			<input onclick="changeColor('text_color');" id="change" type="image" class="icon-image" src="images/color_t.png"  title ="Change font color" />
+			<input onclick="changeBgColor();" id="change" type="image" class="icon-image" src="images/color_icon.png"  title ="Change background color" />
+			<input onclick="changeColor('shading');" id="change" type="image" class="icon-image" src="images/color_text.png"  title ="Shading" />
+		</div>
+
+		<div id = "submeniu4">
+			<button onclick="add_image_modal();" id="add_img" class="icon"  title="Add image"><img src="images/image.png" width="25px" height="25px"/></button>
+			<input onclick="link();" type="image" class="icon-image" title="Add link" src="images/link.png"/>
+			<input onclick="add_audio();" type="image" class="icon-image" title="Add audio" src="images/audio.png"/>	
+			<input onclick="add_video();" type="image" class="icon-image" title="Add video" src="images/video.png"/>
+			<input onclick="add_table();" type="image" class="icon-image" title="Add table" src="images/table.png"/>
+		</div>
+
+		<div id = "submeniu5">
+			<input onclick="source_code();" type="image" class="icon-image" title="View source code" src="images/source_code.png"/>	
+			<input onclick = "save();" value = "Save" type="image" class="icon-image" title="Save" src="images/save.png"/>			
+		</div>
+		
+		<div id = "submeniu6">		
+			<select id="font_list" onchange="changeFontStyles('font');">
+			  
+
+			</select>
+
+			<!-- to do : lista fonturilor din windows -->
+		</div>
+
+		<div id = "submeniu7">		
+			<select id="font_size" onchange="changeFontStyles('size');">
+			  <option value="Select">--Font size--</option>
+			  <option value="8">8</option>
+			  <option value="9">9</option>
+			  <option value="10">10</option>
+			  <option value="11">11</option>
+			  <option value="12">12</option>
+			  <option value="14">14</option>
+			  <option value="16">16</option>
+			  <option value="18">18</option>
+			  <option value="20">20</option>
+			  <option value="22">22</option>
+			  <option value="24">24</option>
+			  <option value="26">26</option>
+			  <option value="28">28</option>
+			  <option value="36">36</option>
+			  <option value="48">48</option>
+			  <option value="72">72</option>
+			</select>
+		</div>
+
+		<div id = "submeniu8">		
+			<select id="headings" onchange="changeFontStyles('heading');">
+			  <option value="select">--Heading--</option>
+			  <option value="H1">H1</option>
+			  <option value="H2">H2</option>
+			  <option value="H3">H3</option>
+			  <option value="H4">H4</option>
+			  <option value="H5">H5</option>
+			  <option value="H6">H6</option>
+			</select>
+		</div>
+   </div>
+
+  	<!-- 	 Modal -->
+		<div id="myModal" class="modal">
+			<div id="wrap" class="modal-content">
+				<span class="close">&times;</span>
+				<form id="form_img">
+					 Insert URL:<br>
+					<input id="url" type="text" name="url">
+					<br>
+					 Width:<br>
+					<input id="width" type="text" name="width">
+					<br>
+                     Height:<br>
+					<input id="height" type="text" name="height">
+					<br>
+					 Alt:<br>
+					<input id="alt" type="text" name="alt">
+					<br><br>
+					Or choose file from computer<br>
+					<input type='file' id='getval'/>
+				</form>
+				<br>
+				<input onclick="add_image();"  type="submit" id="add_image" class ="tag" value="Add">
+			</div>
+		</div>
+
+<!-- Video Modal -->
+		</div>
+		<div id="video_modal" class="modal">
+			 <div id="wrap" class="modal-content">
+				<span class="close">&times;</span>
+				<div id="div1">
+					  URL:<br>
+					  <input id="url_video" type="text" name="width">
+					  <br><br>
+				</div>
+				<div id="div2">
+					  Width:<br>
+					  <input id="width_video" type="text" name="width">
+					  <br>
+					  Height:<br>
+					  <input id="height_video" type="text" name="height">
+					  <br>
+					  Alt:<br>
+					  <input id="alt_video" type="text" name="alt">
+
+				</div>
+				<br>
+				<input onclick="add_video();"  type="submit" id="submit" value="Add">
+			</div>
+		</div>
+
+        <form method = "post" action = "submit.php" id = "form" target="_blank">
+		<textarea name = "textarea" id = "textarea" style = "display: none;"></textarea>
+		<iframe id="textField" name ="textField"></iframe>
+		<div id="footer">
+			<div id="footer1">
+
+				<input id="span" type = "button" onclick = "insert_tag('span');" value = "<span>" class="tag" >	
+				<input id="paragraph" type = "button" onclick = "insert_tag('paragraph');" value = "<p>" class="tag" >	
+				<input id="break" type = "button" onclick = "insert_tag('br');" value = "<br>" class="tag" >
+				<!-- <span id="br">&nbsp;</span> /> -->
+				<input id="div" type = "button" onclick = "insert_tag('div');" value = "<div>" class="tag" >	
+				<input id="space" type = "button" onclick = "insert_tag('space');" value = "space" class="tag" >
+		    </div>
+		</div>
+		<br> 
+	</body>
+			
+</html> 

@@ -1,0 +1,35 @@
+O problema deosebita la implementare a fost aplicarea unor reguli(bold, italic, subliniat) asupra unei secvente de text selectate.
+
+
+
+function insert_image(){
+    var sel, range, node;
+    var iframe = document.getElementById("textField");
+    var win = iframe.contentWindow;
+    if (win.getSelection) {
+        sel = win.getSelection();
+        if (sel.getRangeAt && sel.rangeCount) {
+            range = win.getSelection().getRangeAt(0);
+  
+    //elem.setAttribute("src", url);
+    var html = '<span src="https://www.google.ro/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjvv9Gq4MvSAhWMbRQKHUlrAhgQjRwIBw&url=https%3A%2F%2Fpixabay.com%2Fen%2Fphotos%2Fcat%2F&psig=AFQjCNEbw1CQZDSr1JqMHctGsR4Ladwkgw&ust=1489228954613808">' + elem + '</span>'
+     range.deleteContents();
+    var elem = document.createElement("img");
+    elem.innerHTML = html;
+}
+     } else if (document.selection && document.selection.createRange) {
+        range = document.selection.createRange();
+    }
+
+ }
+
+function getImag() {
+var img = new Image();
+var div = document.getElementById('foo');
+
+img.onload = function() {
+  div.appendChild(img);
+};
+
+img.src = 'images/color_t.png';
+}  
